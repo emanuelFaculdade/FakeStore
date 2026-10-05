@@ -31,3 +31,12 @@ export const Price = styled.Text`
   font-size: 14px;
   color: #25ff08;
 `;
+
+export const Category = styled.View`
+  padding: 8;
+  border: 1px solid #000;
+  border-radius: 999px;
+`;
+
+export const Categorytext = styled.Text`
+`;
