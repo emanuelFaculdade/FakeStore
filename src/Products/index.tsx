@@ -35,6 +35,7 @@ export function Products() {
     const [products, setProducts] = useState<Product[]>([]);
     const [categories, setCategories] = useState<string[]>([]);
     const [search, setSearch] = useState<string>("");
+    const [categoria, setCategoria] = useState("");
 
     useEffect(() => {
         async function loadProducts() {
@@ -57,7 +58,8 @@ export function Products() {
     }, []);
 
     const ProdutosFiltrados: Product[] = products.filter((product) =>
-        product.title.toLowerCase().includes(search.toLowerCase())
+        product.title.toLowerCase().includes(search.toLowerCase()) &&
+        (categoria === "" || product.category === categoria)
     );
 
     return (
@@ -71,11 +73,15 @@ export function Products() {
                     placeholder="Buscar produtos"
                 />
 
+                <CategoryChip onPress={() => setCategoria("")}>
+                    <CategoryText>Todos</CategoryText>
+                </CategoryChip>
+
                 <CategoryList
                     data={categories}
                     keyExtractor={(item) => item}
                     renderItem={({ item }) => (
-                        <CategoryChip>
+                        <CategoryChip onPress={() => setCategoria(item)}>
                             <CategoryText>{item}</CategoryText>
                         </CategoryChip>
                     )}
